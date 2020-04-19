@@ -11,7 +11,7 @@ export default class Header extends React.Component {
               <h2>Student Grade Table</h2>
             </div>
             <div className="col-sm-4">
-              <h2>Average Grade: <span className="badge badge-secondary">{this.props.avgScore}</span></h2>
+              <h2>Average Grade: <span className="badge badge-secondary">{this.props.avgGrade}</span></h2>
             </div>
           </div>
         </div>

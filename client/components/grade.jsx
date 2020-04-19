@@ -9,7 +9,6 @@ export default class Grade extends React.Component {
         <td className='col-4'>{grade.name}</td>
         <td className='col-4'>{grade.course}</td>
         <td className='col-4'>{grade.grade}</td>
-
       </tr>
     );
   }
