@@ -11,6 +11,7 @@ class App extends React.Component {
     };
     this.getAverageGrade = this.getAverageGrade.bind(this);
     this.createGrade = this.createGrade.bind(this);
+    this.deleteGrade = this.deleteGrade.bind(this);
   }
 
   componentDidMount() {
@@ -21,7 +22,6 @@ class App extends React.Component {
     fetch('/api/grades')
       .then(response => response.json())
       .then(data => {
-        console.log(data);
         this.setState({ grades: data });
       })
       .then(this.getAverageGrade())
@@ -39,8 +39,19 @@ class App extends React.Component {
     fetch('/api/grades', req)
       .then(response => response.json())
       .then(data => {
-        console.log(data);
         const newGrades = this.state.grades.concat(data);
+        this.setState({ grades: newGrades });
+      })
+      .catch(error => console.log('Fetch failed!', error));
+  }
+
+  deleteGrade(deleteId) {
+    fetch('/api/grades/' + deleteId, { method: 'DELETE' })
+      .then(response => response.json())
+      .then(() => {
+        const newGrades = this.state.grades.slice();
+        const index = newGrades.findIndex(element => element.id === deleteId);
+        newGrades.splice(index, 1);
         this.setState({ grades: newGrades });
       })
       .catch(error => console.log('Fetch failed!', error));
@@ -60,7 +71,7 @@ class App extends React.Component {
         <Header avgGrade={this.getAverageGrade()} />
         <div className="container">
           <div className="row">
-            <GradeTable grades={this.state.grades}/>
+            <GradeTable grades={this.state.grades} onDelete={this.deleteGrade}/>
             <GradeForm onAdd={this.createGrade}/>
           </div>
         </div>
