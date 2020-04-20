@@ -25,7 +25,7 @@ class App extends React.Component {
         this.setState({ grades: data });
       })
       .then(this.getAverageGrade())
-      .catch(error => console.log('Fetch failed!', error));
+      .catch(error => console.error('Fetch failed!', error));
   }
 
   createGrade(newGrade) {
@@ -42,7 +42,7 @@ class App extends React.Component {
         const newGrades = this.state.grades.concat(data);
         this.setState({ grades: newGrades });
       })
-      .catch(error => console.log('Fetch failed!', error));
+      .catch(error => console.error('Fetch failed!', error));
   }
 
   deleteGrade(deleteId) {
@@ -54,7 +54,7 @@ class App extends React.Component {
         newGrades.splice(index, 1);
         this.setState({ grades: newGrades });
       })
-      .catch(error => console.log('Fetch failed!', error));
+      .catch(error => console.error('Fetch failed!', error));
   }
 
   getAverageGrade() {
